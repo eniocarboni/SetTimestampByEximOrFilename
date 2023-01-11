@@ -31,7 +31,7 @@ SetTimestampByFilename() {
   if [ "x$f" != "x$filedate" -a ${#filedate} -eq 15 ]; then
     readable_date=$(echo $filedate | sed -e 's/^\(....\)\(..\)\(..\)\(..\)\(..\)\.\(..\)/\1\/\2\/\3 \4:\5:\6/')
     echo "$1: setting date to $readable_date ($filedate)"
-    touch -t "$filedate" $1
+    touch -t "$filedate" "$1"
     return 0
    else
      echo "Invalid file name format: $1" >&2
