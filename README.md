@@ -123,13 +123,27 @@ If you don't know how to do it, search online for "**How Do I Enable USB Debuggi
 
 **adb** can be found at https://developer.android.com/studio/releases/platform-tools#downloads
 
+### Get primary internal storage path
+
+The primary storage path is in environment variable $EXTERNAL_STORAGE or is /sdcard
+
+```
+  adb devices
+  pri_storage=$(adb shell 'echo $EXTERNAL_STORAGE')
+  pri_storage=${pri_storage:-/sdcard}
+  echo $pri_storage
+```
+
+We use $pri_storage variable later in adb command.
+
 ### Copy the script into the device
 
 To copy the script we enter the folder that contains it and use the commands:
 
 ```
   adb devices
-  adb push SetTimestampByFilenameAndroidAdb.sh storage/emulated/0
+  adb push SetTimestampByFilenameAndroidAdb.sh $pri_storage
+  adb shell ls -al ${pri_storage}/
 ```
 
 At this point the script is inside the internal memory of the Android device.
@@ -138,7 +152,10 @@ At this point the script is inside the internal memory of the Android device.
 
 ```
   adb shell
-  cd storage/emulated/0
+  s=$EXTERNAL_STORAGE
+  s=${s:-/sdcard}
+  echo $s
+  cd $s
   sh ./SetTimestampByFilenameAndroidAdb.sh DCIM/Camera/IMG_20230105_123335.jpg
   sh ./SetTimestampByFilenameAndroidAdb.sh DCIM/Camera/VID_20230105_124001.mp4
 ```
@@ -147,7 +164,10 @@ At this point the script is inside the internal memory of the Android device.
 
 ```
   adb shell
-  cd storage/emulated/0
+  s=$EXTERNAL_STORAGE
+  s=${s:-/sdcard}
+  echo $s
+  cd $s
   sh ./SetTimestampByFilenameAndroidAdb.sh "Android/media/com.whatsapp/WhatsApp/Media/WhatsApp Images/IMG-20230102-WA0007.jpg"
 ```
 
@@ -155,7 +175,10 @@ At this point the script is inside the internal memory of the Android device.
 
 ```
   adb shell
-  cd storage/emulated/0
+  s=$EXTERNAL_STORAGE
+  s=${s:-/sdcard}
+  echo $s
+  cd $s
   sh ./SetTimestampByFilenameAndroidAdb.sh "Android/media/com.whatsapp/WhatsApp/Media/WhatsApp Images"
 ```
 
