@@ -43,11 +43,11 @@ SetTimestampByFilename() {
   fi
 }
 
-# SetTimestampByExit()
+# SetTimestampByExif()
 #  Change file modification date by exif
 #  the time converted for touch command is in format: YYYYMMDDHHmm.ss
 # Return 0 if time changed else 1
-SetTimestampByExit() {
+SetTimestampByExif() {
   local filedate=""
   local readable_date=""
   filedate=$(exiftool -p '$MediaCreateDate' "$1" 2>/dev/null | sed -e 's/[: ]//g' -e 's/\(..$\)/\.\1/')
@@ -73,12 +73,12 @@ SetTimestampByExit() {
   fi
 }
 
-# SetTimestampByExitOrFilename()
-#  wrapper function for SetTimestampByFilename and SetTimestampByExit
+# SetTimestampByExifOrFilename()
+#  wrapper function for SetTimestampByFilename and SetTimestampByExif
 # Return 0 if time changed else 1
-SetTimestampByExitOrFilename() {
+SetTimestampByExifOrFilename() {
   if [ "$exiftool" -eq 1 ]; then
-    SetTimestampByExit "$1"
+    SetTimestampByExif "$1"
     if [ $? -ne 0 ]; then
       SetTimestampByFilename "$1"
     fi
@@ -105,11 +105,11 @@ if [ $? -ne 0 ]; then
 fi
 
 if [ -f "$@" ]; then
-  SetTimestampByExitOrFilename "$@"
+  SetTimestampByExifOrFilename "$@"
 else
   for file in "$@"/*; do
     if [ -f "$file" ]; then
-      SetTimestampByExitOrFilename "$file"
+      SetTimestampByExifOrFilename "$file"
     fi
   done
 fi
