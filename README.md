@@ -123,6 +123,8 @@ If you don't know how to do it, search online for "**How Do I Enable USB Debuggi
 
 **adb** can be found at https://developer.android.com/studio/releases/platform-tools#downloads
 
+**Note**: *SetTimestampByFilenameAndroidAdb.sh* use commands **sed** and **basename** available from [Android 6.0](https://android.googlesource.com/platform/system/core/+/master/shell_and_utilities/README.md#android-6_0-marshmallow) (Marshmallow)
+
 ### Get primary internal storage path
 
 The primary storage path is in environment variable $EXTERNAL_STORAGE or is /sdcard

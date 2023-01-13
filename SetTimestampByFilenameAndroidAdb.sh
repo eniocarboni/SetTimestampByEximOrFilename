@@ -49,6 +49,13 @@ else
   fi
 fi
 
+ver_completa=$(getprop ro.build.version.release)
+ver=${ver_completa/.*}
+if [ -n "$ver" -a "$ver" -lt 6 ]; then
+  echo "Android version $ver_completa not supported"
+  exit 3
+fi
+
 if [ -f "$@" ]; then
   SetTimestampByFilename "$@"
 else
