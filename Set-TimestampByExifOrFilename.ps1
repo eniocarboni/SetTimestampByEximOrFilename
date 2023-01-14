@@ -75,9 +75,9 @@ Change file modification/creation date by Exif
 Specifies the file name
 
 .OUTPUTS
-System.String. Set-TimestamByExif returns a string "OK" if time changed else "ERR"
+System.String. Set-TimestampByExif returns a string "OK" if time changed else "ERR"
 #>
-function Set-TimestamByExif() {
+function Set-TimestampByExif() {
   [CmdletBinding()]
   param (
     [Parameter(Mandatory)] [string]$File
@@ -119,7 +119,7 @@ function Set-TimestamByExif() {
 
 <#
 .DESCRIPTION
-Wrapper function for Set-TimestamByExif and Set-TimestampByFilename
+Wrapper function for Set-TimestampByExif and Set-TimestampByFilename
 
 .PARAMETER File
 Specifies the file name
@@ -132,7 +132,7 @@ function Set-Timestamp() {
   param (
     [Parameter(Mandatory)] [string]$File
   )
-  $ret=Set-TimestamByExif -File $File
+  $ret=Set-TimestampByExif -File $File
   if ($ret -match '^ERR') {
     $ret2=Set-TimestampByFilename -File $File
     if ($ret2 -match '^ERR') {
