@@ -1,8 +1,8 @@
 #! /bin/bash
 
-# Change modification time of image/video files by exim date or filename format
+# Change modification time of image/video files by exif date or filename format
 
-# EXIM: (To see id tag use exiftool -D -S <image_file>)
+# EXIF: (To see id tag use exiftool -D -S <image_file>)
 #  image: use tag 'CreateDate' (id 36868) or 'DateTimeOriginal' (id 36867)
 #  video: use tag 'MediaCreateDate'
 
@@ -61,10 +61,10 @@ SetTimestampByExif() {
     readable_date=$(echo $filedate | sed -e 's/^\(....\)\(..\)\(..\)\(..\)\(..\)\.\(..\)/\1\/\2\/\3 \4:\5:\6/')
     date --date "$readable_date" >/dev/null 2>&1
     if [ $? -ne 0 ]; then
-      echo "ERR: $1: invalid exim date format" >&2
+      echo "ERR: $1: invalid exif date format" >&2
       return 2
     fi
-    echo "$1: setting date exim to $readable_date ($filedate)"
+    echo "$1: setting date exif to $readable_date ($filedate)"
     touch -t "$filedate" "$1"
     return 0
   else

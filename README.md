@@ -1,8 +1,8 @@
-# SetTimestampByEximOrFilename
+# SetTimestampByExifOrFilename
 
 [![GPL License](https://img.shields.io/badge/license-GPL-blue.svg)](https://www.gnu.org/licenses/) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/EnioCarboni)
 
-**SetTimestampByEximOrFilename** is useful for fixing the creation or modification date of an image or video file.
+**SetTimestampByExifOrFilename** is useful for fixing the creation or modification date of an image or video file.
 
 Let's think about when you copy images from one disk to another, without the appropriate precautions on the original date of the images, or when you recover from a backup or when you restore the WhatsApp archive in a new mobile phone.
 
@@ -18,7 +18,7 @@ In the **Android** script, the original date is taken from the file name only.
 
 ## How the original date is derived
 
-### Exim Metadata
+### Exif Metadata
 
 * images: use tag '*CreateDate*' or '*ExifDTOrig*' (id 36868) if present or '*DateTimeOriginal*' or '*ExifDTDigitized*' (id 36867)
 * videos (only **Linux**): use tag '*MediaCreateDate*'
@@ -45,7 +45,7 @@ Note: On WhatsApp file the "WAMMSS" is considered as "00MMSS"
 ### Synopsis
 
 ```
-  SetTimestampByEximOrFilename.sh <file|directory>
+  SetTimestampByExifOrFilename.sh <file|directory>
 ```
 
 To extract the *exif metadata*, the **exiftool** command is used and must be installed separately otherwise only the file name will be used to know the file creation date.
@@ -74,13 +74,13 @@ To extract the *exif metadata*, the **exiftool** command is used and must be ins
 ### Example 1: Fix date on single image file
 
 ```
-  SetTimestampByEximOrFilename.sh $HOME/Images/IMG_20230108_122531.jpg
+  SetTimestampByExifOrFilename.sh $HOME/Images/IMG_20230108_122531.jpg
 ```
 
 ### Example 2: Fix dates on all images file on a directory
 
 ```
-  SetTimestampByEximOrFilename.sh $HOME/Images
+  SetTimestampByExifOrFilename.sh $HOME/Images
 ```
 
 # Windows
@@ -88,21 +88,21 @@ To extract the *exif metadata*, the **exiftool** command is used and must be ins
 ### Synopsis
 
 ```
-  Set-TimestampByEximOrFilename.ps1 -File <file|directory>
+  Set-TimestampByExifOrFilename.ps1 -File <file|directory>
 
-  Get-Help ./Set-TimestampByEximOrFilename.ps1
+  Get-Help ./Set-TimestampByExifOrFilename.ps1
 ```
 
 ### Example 3: Fix date on single WhatsApp image file
 
 ```
-  ./Set-TimestampByEximOrFilename.ps1 -File IMG_20221109_WA1356.jpg
+  ./Set-TimestampByExifOrFilename.ps1 -File IMG_20221109_WA1356.jpg
 ```
 
 ### Example 4: Fix dates on all images file on a directory
 
 ```
-./Set-TimestampByEximOrFilename.ps1 -File Images
+./Set-TimestampByExifOrFilename.ps1 -File Images
 ```
 
 
@@ -188,17 +188,17 @@ At this point the script is inside the internal memory of the Android device.
 
       Copyright (c) 2023 Enio Carboni - Italy
 
-      This file is part of SetTimestampByEximOrFilename.
+      This file is part of SetTimestampByExifOrFilename.
 
-      SetTimestampByEximOrFilename is free software: you can redistribute it and/or modify it under the
+      SetTimestampByExifOrFilename is free software: you can redistribute it and/or modify it under the
       terms of the GNU General Public License as published by the Free Software
       Foundation, either version 3 of the License, or (at your option) any later
       version.
 
-      SetTimestampByEximOrFilename is distributed in the hope that it will be useful, but WITHOUT ANY
+      SetTimestampByExifOrFilename is distributed in the hope that it will be useful, but WITHOUT ANY
       WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
       FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
       details.
 
       You should have received a copy of the GNU General Public License along
-      with SetTimestampByEximOrFilename.  If not, see <http://www.gnu.org/licenses/>.
+      with SetTimestampByExifOrFilename.  If not, see <http://www.gnu.org/licenses/>.

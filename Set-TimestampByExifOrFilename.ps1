@@ -1,11 +1,11 @@
 <#
 .SYNOPSIS
-Change modification/creation time of image/video files by exim date or filename format
+Change modification/creation time of image/video files by exif date or filename format
 
 .DESCRIPTION
-Change modification/creation time of image/video files by exim date or filename format
+Change modification/creation time of image/video files by exif date or filename format
 
- EXIM:
+ EXIF:
    image: use tag 'ExifDTOrig' (id 36868) or 'ExifDTDigitized' (id 36867)
 
  File name formats:
