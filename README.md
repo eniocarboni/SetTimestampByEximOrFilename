@@ -27,19 +27,19 @@ Note: on **Linux** you can use `exiftool -D -S <image_file>` to see the id tag
 
 ### File name formats:
 
-* IMG[_-]YYYYMMDD[_-]HHMMSS.*$ Generic image file
-* VID[_-]YYYYMMDD[_-]HHMMSS.*$ Generic video file
-* SAVE[_-]YYYYMMDD[_-]HHMMSS.*$ Generic image/video file saved
-* ^[A-Za-z]{3,5}[_-]YYYYMMDD[_-]HHMMSS.*$ Generic format
+* IMG[_-]YYYYMMDD[_-]HHmmss.*$ Generic image file
+* VID[_-]YYYYMMDD[_-]HHmmss.*$ Generic video file
+* SAVE[_-]YYYYMMDD[_-]HHmmss.*$ Generic image/video file saved
+* ^[A-Za-z]{3,5}[_-]YYYYMMDD[_-]hhmmss.*$ Generic format
 * WhatsApp:
-  *  IMG-YYYYMMDD-WAMMSS.*$ Generic "WhatsApp Image" file
-  *  VID-YYYYMMDD-WAMMSS.*$ Generic "WhatsApp Video" file
-  *  AUD-YYYYMMDD-WAMMSS.*$ Generic "WhatsApp Audio" file
-  *  STK-YYYYMMDD-WAMMSS.*$ Generic "WhatsApp Stickers" file
-  *  PTT-YYYYMMDD-WAMMSS.*$ Generic "WhatsApp Voice Notes" file
-  *  ^[A-Za-z]{3,5}[_-]YYYYMMDD[_-]WAMMSS.*$ Generic "WhatsApp format" file
+  *  IMG-YYYYMMDD-WASEQ.*$ Generic "WhatsApp Image" file
+  *  VID-YYYYMMDD-WASEQ.*$ Generic "WhatsApp Video" file
+  *  AUD-YYYYMMDD-WASEQ.*$ Generic "WhatsApp Audio" file
+  *  STK-YYYYMMDD-WASEQ.*$ Generic "WhatsApp Stickers" file
+  *  PTT-YYYYMMDD-WASEQ.*$ Generic "WhatsApp Voice Notes" file
+  *  ^[A-Za-z]{3,5}[_-]YYYYMMDD[_-]WASEQ.*$ Generic "WhatsApp format" file
 
-Note: On WhatsApp file the "WAMMSS" is considered as "00MMSS"
+Note: On WhatsApp file the "WASEQ" is tranlated from seq (WA0000 - WA9999) to hhmmss (000000 - 024639)
 ## Linux
 
 ### Synopsis

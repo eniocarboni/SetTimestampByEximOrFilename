@@ -9,15 +9,15 @@ Change modification/creation time of image/video files by exif date or filename 
    image: use tag 'ExifDTOrig' (id 36868) or 'ExifDTDigitized' (id 36867)
 
  File name formats:
- IMG[_-]YYYYMMDD[_-]HHMMSS.*$ Generic image file
- VID[_-]YYYYMMDD[_-]HHMMSS.*$ Generic video file
- SAVE[_-]YYYYMMDD[_-]HHMMSS.*$ Generic image/video file saved
+ IMG[_-]YYYYMMDD[_-]HHmmss.*$ Generic image file
+ VID[_-]YYYYMMDD[_-]HHmmss.*$ Generic video file
+ SAVE[_-]YYYYMMDD[_-]HHmmss.*$ Generic image/video file saved
  WhatsApp:
-  IMG-YYYYMMDD-WAMMSS.*$ Generic "WhatsApp Image" file
-  VID-YYYYMMDD-WAMMSS.*$ Generic "WhatsApp Video" file
-  AUD-YYYYMMDD-WAMMSS.*$ Generic "WhatsApp Audio" file
-  STK-YYYYMMDD-WAMMSS.*$ Generic "WhatsApp Stickers" file
-  PTT-YYYYMMDD-WAMMSS.*$ Generic "WhatsApp Voice Notes" file
+  IMG-YYYYMMDD-WASEQ.*$ Generic "WhatsApp Image" file
+  VID-YYYYMMDD-WASEQ.*$ Generic "WhatsApp Video" file
+  AUD-YYYYMMDD-WASEQ.*$ Generic "WhatsApp Audio" file
+  STK-YYYYMMDD-WASEQ.*$ Generic "WhatsApp Stickers" file
+  PTT-YYYYMMDD-WASEQ.*$ Generic "WhatsApp Voice Notes" file
 
 .PARAMETER File
 Specifies the file or directory name
@@ -40,6 +40,7 @@ Change file modification/creation date by filename
   - follow by 2 numbers (hours) or WA for WhatsApp file;
   - follow by 2 numbers (minutes);
   - follow by 2 numbers (seconds).
+  If WhatsApp, WASEQ is tranlated from seq (WA0000 - WA9999) to hhmmss (000000 - 024639) 
 
 .PARAMETER File
 Specifies the file name
@@ -60,7 +61,14 @@ function Set-TimestampByFilename() {
     return "ERR: Invalid file name format: ${fileName}"
   }
   $filedate=$Matches[1] + '/' + $Matches[2] +'/'+ $Matches[3] +' '+ $Matches[4] +':'+ $Matches[5] +':'+ $Matches[6]
-  $filedate = $filedate -replace 'WA','00'
+  if ($filedate -match 'WA:(?<mm>\d\d):(?<ss>\d\d)') {
+    $seq_wa=[int]($matches['mm'] + $matches['ss'])
+    $hh=[int]($seq_wa / 3600)
+    $mm=[Math]::Floor(($seq_wa - ($hh * 3600)) / 60)
+    $ss=[Math]::Floor($seq_wa - ($hh * 3600) - ($mm * 60) )
+    $hhmmss="{0:d2}:{1:d2}:{2:d2}" -f [int]$hh, [int]$mm, [int]$ss
+    $filedate = $filedate -replace 'WA:\d{2}:\d{2}', $hhmmss
+  }   
   $(Get-Item $File).creationtime=$(Get-Date $filedate)
   $(Get-Item $File).lastwritetime=$(Get-Date $filedate)
   Write-Host "${File}: setting date to ${filedate}"
@@ -68,7 +76,7 @@ function Set-TimestampByFilename() {
 }
 
 <#
-.DESCRIPTION
+.D$filedateESCRIPTION
 Change file modification/creation date by Exif
 
 .PARAMETER File
